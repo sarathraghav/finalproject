@@ -3,6 +3,7 @@ import pickle
 import numpy as np
 
 app = Flask(__name__)
+database={}
 
 clf0 = pickle.load(open("lrclfmodel.pkl","rb"))
 clf1 = pickle.load(open("nbclfmodel.pkl","rb"))
@@ -20,19 +21,31 @@ reg3 = pickle.load(open("life_insurance_predictiongr.pkl","rb"))
 @app.route('/')
 def hello_world():
     return render_template("login.html")
-database={'buvan':'buvan','sarath':'sarath','chaitanya':'chaitanya'}
 
-@app.route('/form_login',methods=['POST','GET'])
+
+@app.route('/form_login',methods=['GET','POST'])
 def login():
-    name1=request.form['username']
-    pwd=request.form['password']
-    if name1 not in database:
-         return render_template('login.html',info='Invalid User')
-    else:
-         if database[name1]!=pwd:
-              return render_template('login.html',info='Invalid Password')
-         else:
-              return render_template('main.html',name=name1)
+    if request.method == 'POST':
+        name = request.form['username']
+        pwd = request.form['password']
+        if name not in database:
+            return render_template('signup.html', info='Username does not exist.')
+        else:
+            if database[name] != pwd:
+                return render_template('signup.html', info='Incorrect password.')
+            else:
+                return render_template('main.html', name=name)
+    return render_template('main.html')
+
+@app.route('/form_signup', methods=['GET', 'POST'])
+def signup():
+       if request.method == 'POST':
+          name = request.form['username']
+          pwd = request.form['password']
+          database[name] = pwd
+          return render_template('login.html', info='Successfully registered. Please log in.')
+       else:
+          return render_template('login.html')
 
 
 @app.route('/predict', methods=['GET','POST'])
