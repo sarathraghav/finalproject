@@ -3,6 +3,7 @@
 <html lang="en" dir="ltr">
 
 <head>
+  <title>Welcome, {{ username }}!</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Heart Disease Predictor</title>
@@ -12,6 +13,7 @@
 </head>
 
 <body>
+ 
 
   <!-- Website Title -->
 
@@ -21,7 +23,10 @@
       <p>A Machine Learning Web Application that predicits chances of having heart Disease or not and also calculates the estimated price of life insurance per year, Built with Flask.</p><br>
     </div>
   </div>
-
+  <h2 style="color:rgb(0, 0, 0);font-size:20px;">Welcome, {{ username }}! <a href="{{ url_for('static',filename='k.html') }}">clickhere</a></h2>
+  <p style="color:rgb(8, 8, 8);font-size:20px;">
+    <marquee> You have successfully logged in,plz fill the details in the following form for heart disease prediction and to caluclate the insurance
+    </marquee></p>
   <!-- Text Area -->
   <div class="ml-container">
     <form action="{{ url_for('predict')}}" method="POST"> 

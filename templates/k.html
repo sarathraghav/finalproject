@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Field Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    #container {
+      width: 80%;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    select {
+      display: block;
+      margin-bottom: 20px;
+      font-size: 16px;
+      padding: 10px;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+      background-color: white;
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-top: 0;
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+
+    button {
+      display: block;
+      margin-top: 20px;
+      font-size: 16px;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <label for="fields">Select a field:</label>
+    <select id="fields">
+      <option value="">--Select a field--</option>
+      <option value="age">Age</option>
+      <option value="sex">Sex</option>
+      <option value="chestpain">Chest Pain</option>
+      <option value="region">Region</option>
+      <option value="BMI">BMI</option>
+    </select>
+
+    <button onclick="displayFieldDetails()">Submit</button>
+
+    <div id="fieldDetails"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
