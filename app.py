@@ -120,7 +120,7 @@ def predict():
   
         # Your Account Sid and Auth Token from twilio.com / console
         account_sid = 'ACab5818a9b3b8af6f717b6c4ee2e948f8'
-        auth_token = 'ea4a43f3ddd1ddbd877107e63efdb7c4'
+        auth_token = '3731507625a60d3c3c210d9d7dd4452c'
         if(my_prediction1==1):
   
             client = Client(account_sid, auth_token)
@@ -140,6 +140,23 @@ def predict():
                             )
         return render_template('result.html', prediction1=my_prediction1,prediction3=my_prediction3,prediction_text = "The cost of health insurance per year is {}").format(my_prediction2)
         
+@app.route('/clickhere')
+def clickhere():
+     return render_template('k.html')
 
+
+
+
+@app.route('/details')
+def index():
+    return render_template('k.html')
+
+
+
+
+
+@app.route('/back')
+def back():
+     return render_template('main.html')
 if __name__ == '__main__':
 	app.run(debug=True)
