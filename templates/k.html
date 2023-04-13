@@ -1,76 +1,102 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Field Details</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
-    }
+	<title>Drop-down boxes with description</title>
+	<style>
+		body {
+			background-image: url('https://mcdn.wallpapersafari.com/medium/19/47/8lxQfk.jpg');
+			background-size: cover;
+            font-family: Arial, sans-serif;
+            text-align: center;
+		}
 
-    #container {
-      width: 80%;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: white;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    }
+		.container {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			justify-content: center;
+			align-items: center;
+			height: 100%;
+		}
 
-    label {
-      display: block;
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
+		.select-container {
+			margin: 20px;
+		}
 
-    select {
-      display: block;
-      margin-bottom: 20px;
-      font-size: 16px;
-      padding: 10px;
-      border: 2px solid #ccc;
-      border-radius: 4px;
-      background-color: white;
-    }
+		form {
+			display: inline-block;
+			background-color: rgb(140, 196, 35);
+			padding: 10px;
+			border-radius: 10px;
+		}
 
-    h2 {
-      font-size: 24px;
-      margin-top: 0;
-    }
+		form label {
+			display: block;
+			margin-bottom: 5px;
+		}
 
-    p {
-      margin-bottom: 10px;
-    }
-
-    button {
-      display: block;
-      margin-top: 20px;
-      font-size: 16px;
-      padding: 10px;
-      border: none;
-      border-radius: 4px;
-      background-color: #4CAF50;
-      color: white;
-      cursor: pointer;
-    }
-  </style>
+		#description {
+			text-align: center;
+			color: rgb(0, 0, 0);
+			font-size: 1.5rem;
+			margin-top: 20px;
+		}
+	</style>
 </head>
 <body>
-  <div id="container">
-    <label for="fields">Select a field:</label>
-    <select id="fields">
-      <option value="">--Select a field--</option>
-      <option value="age">Age</option>
-      <option value="sex">Sex</option>
-      <option value="chestpain">Chest Pain</option>
-      <option value="region">Region</option>
-      <option value="BMI">BMI</option>
-    </select>
+	<div class="container">
+		<div class="select-container">
+			<form>
+				<label for="heart-disease">Heart Disease Risk Factors:</label>
+				<select name="heart-disease" id="heart-disease">
+					<option value="">Select an option</option>
+					<option value="age">Age</option>
+					<option value="sex">Sex</option>
+				</select>
+			</form>
+		</div>
 
-    <button onclick="displayFieldDetails()">Submit</button>
+		<div class="select-container">
+			<form>
+				<label for="ml-details">ML Details:</label>
+				<select name="ml-details" id="ml-details">
+					<option value="">Select an option</option>
+					<option value="svm">SVM</option>
+					<option value="knn">KNN</option>
+				</select>
+			</form>
+		</div>
+	</div>
 
-    <div id="fieldDetails"></div>
-  </div>
+	<p id="description"></p>
 
-  <script src="script.js"></script>
+	<script>
+		const heartDiseaseSelect = document.querySelector('#heart-disease');
+		const mlDetailsSelect = document.querySelector('#ml-details');
+		const descriptionElement = document.querySelector('#description');
+
+		heartDiseaseSelect.addEventListener('change', (event) => {
+			const option = event.target.value;
+			let description = "";
+			if (option == 'age') {
+				description = "Age is a major risk factor for heart disease.";
+			} else if (option == 'sex') {
+				description = "Males are at a higher risk of developing heart disease.";
+			}
+			descriptionElement.textContent = description;
+		});
+
+		mlDetailsSelect.addEventListener('change', (event) => {
+			const option = event.target.value;
+			let description = "";
+			if (option == 'svm') {
+				description = "Support Vector Machine (SVM) is a machine learning algorithm used for classification and regression analysis.";
+			} else if (option == 'knn') {
+				description = "K-Nearest Neighbors (KNN) is a machine learning algorithm used for classification and regression analysis.";
+			}
+			descriptionElement.textContent = description;
+		});
+	</script>
+	<form action="{{ url_for('back')}}"> <input type="submit" class="my-cta-button" value="back"></form>
 </body>
 </html>
