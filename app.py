@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, app, jsonify, url_for,redirect
+from flask import Flask, render_template, request, app, jsonify, url_for, redirect
 import pickle
 import numpy as np
 
@@ -17,8 +17,7 @@ reg2 = pickle.load(open("life_insurance_predictionrf.pkl","rb"))
 reg3 = pickle.load(open("life_insurance_predictiongr.pkl","rb"))
 
 
-
-users = {}
+users = {'buvan':'buvan','sarath':'sarath','chaitanya':'chaitanya'}
 
 # signup route
 @app.route('/', methods=['GET', 'POST'])
@@ -54,7 +53,6 @@ def login():
 def welcome(username):
     # render welcome page with username
     return render_template('main.html', username=username)
-
 
 
 @app.route('/predict', methods=['GET','POST'])
@@ -116,35 +114,16 @@ def predict():
              
         
         
-        from twilio.rest import Client
-  
-        # Your Account Sid and Auth Token from twilio.com / console
-        account_sid = 'ACab5818a9b3b8af6f717b6c4ee2e948f8'
-        auth_token = '3731507625a60d3c3c210d9d7dd4452c'
-        if(my_prediction1==1):
-  
-            client = Client(account_sid, auth_token)
-            message = client.messages.create(
-                                from_='+15077040615',
-                                body ='You have chances of heart disease.Please consult a doctor at the earliest',
-                                to =mobile
-                            )
-            
-        elif(my_prediction1==0):
-  
-            client = Client(account_sid, auth_token)
-            message = client.messages.create(
-                                from_='+15077040615',
-                                body ='Congratulations You do not have major chances of heart disease',
-                                to =mobile
-                            )
         return render_template('result.html', prediction1=my_prediction1,prediction3=my_prediction3,prediction_text = "The cost of health insurance per year is {}").format(my_prediction2)
+        
         
 @app.route('/clickhere')
 def clickhere():
      return render_template('k.html')
 
-
+@app.route('/algorithms')
+def algorithms():
+     return render_template('algorithms.html')
 
 
 @app.route('/details')
@@ -158,5 +137,13 @@ def index():
 @app.route('/back')
 def back():
      return render_template('main.html')
+
+@app.route('/Back')
+def Back():
+     return render_template('k.html')
+
+@app.route('/logout')
+def logout():
+     return render_template('thank.html')
 if __name__ == '__main__':
 	app.run(debug=True)
